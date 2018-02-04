@@ -15,14 +15,17 @@ client = gspread.authorize(creds)
 sheet = client.open("test").sheet1
 
 #stock = '034950'  
-stock = '092130'
+#stock = '092130'
+stocks = []
+stocks.append('092130')
+
 sums = {}   
-url = 'http://finance.naver.com/item/frgn.nhn?code=%s&page=' % stock  
+url = 'http://finance.naver.com/item/frgn.nhn?code=%s&page=' % stocks[0]  
 page = 1  
 prev = datetime.date(1900, 1, 1) 
 
 per_old = 0 
-while page < 100:  
+while page < 10:  
     query = url + str(page)  
 #    print('Query ' + query)  
     r = requests.get(query)   
@@ -50,12 +53,19 @@ ordered_sums = collections.OrderedDict(sorted(sums.items()))
 
 row = 1
 sheet.update_cell(row, 1, 'Time')
-sheet.update_cell(row, 2, 'Monthly Percent')
 
 for k, v  in ordered_sums.items():
     row = row + 1
     print(k, v)
     sheet.update_cell(row, 1, k)
+#    sheet.update_cell(row, 2, v)
+
+row = 1
+sheet.update_cell(row, 2, stocks[0])
+for k, v  in ordered_sums.items():
+    row = row + 1
+    print(k, v)
+#    sheet.update_cell(row, 1, k)
     sheet.update_cell(row, 2, v)
 
 
