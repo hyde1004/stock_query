@@ -37,7 +37,6 @@ def do_index(stocks):
 		html = r.text   
 		soup = bs(html, 'html.parser')   
 		day_info= soup.select('body > div > div > div > div > table > tr > td:nth-of-type(1) > span')   
-		foreign_info = soup.select('body > div > div > div > div > table > tr > td:nth-of-type(9) > span')  
 
 		for day in day_info:   
 			s = datetime.datetime.strptime(day.text, '%Y.%m.%d')   
