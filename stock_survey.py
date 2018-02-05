@@ -29,7 +29,7 @@ def do_index(stocks):
 	stock = stocks[0]
 	row = 2
 
-	for page in range(1, 100):
+	for page in range(1, 10):
 		query_url = 'http://finance.naver.com/item/frgn.nhn?code=%s&page=%s' % (stock, page) 
 		#print(query_url)
 		r = requests.get(query_url)   
@@ -59,7 +59,7 @@ def do_query(stocks):
 		row = 2
 		col = stocks.index(stock) + 2
 		sheet.update_cell(1, col, stock_name[stock])
-		for page in range(1, 100):
+		for page in range(1, 10):
 			query_url = 'http://finance.naver.com/item/frgn.nhn?code=%s&page=%s' % (stock, page) 
 
 			r = requests.get(query_url)   
