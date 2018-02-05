@@ -7,6 +7,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 my_stocks = ['034950', '092130']
+stock_name = {'034950': '한국기업평가', '092130': '이크레더블'}
 index_day = []
 result = {}
 
@@ -57,7 +58,7 @@ def do_query(stocks):
 	for stock in stocks:
 		row = 2
 		col = stocks.index(stock) + 2
-		sheet.update_cell(1, col, stock)
+		sheet.update_cell(1, col, stock_name[stock])
 		for page in range(1, 100):
 			query_url = 'http://finance.naver.com/item/frgn.nhn?code=%s&page=%s' % (stock, page) 
 
