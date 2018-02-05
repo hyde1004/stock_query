@@ -6,8 +6,8 @@ import pprint
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-my_stocks = ['034950', '092130']
-stock_name = {'034950': '한국기업평가', '092130': '이크레더블'}
+my_stocks = ['034950', '092130', '015760', '002960']
+stock_name = {'034950': '한국기업평가', '092130': '이크레더블', '015760':'한국전력', '002960':'한국쉘석유'}
 index_day = []
 result = {}
 
