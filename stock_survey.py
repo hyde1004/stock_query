@@ -38,7 +38,7 @@ def do_index(stocks):
 		day_info= soup.select('body > div > div > div > div > table > tr > td:nth-of-type(1) > span')   
 		foreign_info = soup.select('body > div > div > div > div > table > tr > td:nth-of-type(9) > span')  
 
-		for day, foreign in zip(day_info, foreign_info):   
+		for day in day_info:   
 			s = datetime.datetime.strptime(day.text, '%Y.%m.%d')   
 			current = datetime.date(s.year, s.month, s.day)  
 			#print(current) 
