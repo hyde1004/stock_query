@@ -6,10 +6,11 @@ import pprint
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-my_stocks = ['034950', '092130', '015760', '002960']
-stock_name = {'034950': '한국기업평가', '092130': '이크레더블', '015760':'한국전력', '002960':'한국쉘석유'}
+my_stocks = ['034950', '092130', '015760', '002960', '002460', '017670']
+stock_name = {'034950': '한국기업평가', '092130': '이크레더블', '015760':'한국전력', '002960':'한국쉘석유', '002460':'화성산업', '017670':'SK텔레콤'}
 index_day = []
 result = {}
+period = range(1, 36)
 
 #def do_init():
 	# use creds to create a client to interact with the Google Drive API
@@ -30,7 +31,7 @@ def do_index(stocks):
 	stock = stocks[0]
 	row = 2
 
-	for page in range(1, 10):
+	for page in period:
 		query_url = 'http://finance.naver.com/item/frgn.nhn?code=%s&page=%s' % (stock, page) 
 		#print(query_url)
 		r = requests.get(query_url)   
@@ -59,7 +60,7 @@ def do_query(stocks):
 		row = 2
 		col = stocks.index(stock) + 2
 		sheet.update_cell(1, col, stock_name[stock])
-		for page in range(1, 10):
+		for page in period:
 			query_url = 'http://finance.naver.com/item/frgn.nhn?code=%s&page=%s' % (stock, page) 
 
 			r = requests.get(query_url)   
