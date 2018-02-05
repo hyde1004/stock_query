@@ -20,6 +20,7 @@ client = gspread.authorize(creds)
 	# Find a workbook by name and open the first sheet
 	# Make sure you use the right name here.
 sheet = client.open("test").sheet1	
+sheet.clear()
 
 def do_index(stocks):
 	print('index...')
