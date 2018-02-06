@@ -38,29 +38,14 @@ sheet.clear()
 def do_index(stocks):
 	print('index...')
 
-	sheet.update_cell(1, 1, "Time")
-	prev = datetime.date(1900, 1, 1)
-	stock = stocks[0]
-	row = 2
-
-	for page in period:
-		query_url = 'http://finance.naver.com/item/frgn.nhn?code=%s&page=%s' % (stock, page) 
-		#print(query_url)
-		r = requests.get(query_url)   
-		html = r.text   
-		soup = bs(html, 'html.parser')   
-		day_info= soup.select('body > div > div > div > div > table > tr > td:nth-of-type(1) > span')   
-
-		for day in day_info:   
-			s = datetime.datetime.strptime(day.text, '%Y.%m.%d')   
-			current = datetime.date(s.year, s.month, s.day)  
-			#print(current) 
-			if (current.year != prev.year or current.month != prev.month): 
-				k = current.strftime('%Y-%m-%d')
-				result[k] = []
-				sheet.update_cell(row, 1, k)
-				row = row + 1
-			prev = current 
+	row = 1
+	col = 1
+	sheet.update_cell(row, col, 'date')
+	
+	for check_day in check_days:
+		row = row + 1
+		result[check_day] = []
+		sheet.update_cell(row, col, check_day)
 
 
 def do_query(stocks):
