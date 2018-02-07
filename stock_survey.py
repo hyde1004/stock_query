@@ -51,6 +51,8 @@ def do_index(stocks):
 		result[check_day] = []
 		sheet.update_cell(row, col, check_day)
 
+def get_referece_day(row):
+	return sheet.cell(row, 1).value
 
 def do_query(stocks):
 	print('query...')
@@ -60,6 +62,7 @@ def do_query(stocks):
 	for stock in stocks:
 		row = 2
 		col = stocks.index(stock) + 2
+		reference_row = 2
 		sheet.update_cell(1, col, stock_name[stock])
 		for page in period:
 			query_url = 'http://finance.naver.com/item/frgn.nhn?code=%s&page=%s' % (stock, page) 
@@ -73,12 +76,21 @@ def do_query(stocks):
 			for day, foreign in zip(day_info, foreign_info):   
 				s = datetime.datetime.strptime(day.text, '%Y.%m.%d')   
 				current = datetime.date(s.year, s.month, s.day)   
-				if (current.year != prev.year or current.month != prev.month): 
+				t = datetime.datetime.strptime(get_referece_day(reference_row), '%Y-%m-%d')
+				reference = datetime.date(t.year, t.month, t.day)
+				print('reference:%s, current:%s' % (reference, current) )
+				if current == reference:
 					k = current.strftime('%Y-%m-%d')
 					print('index: %s' % stocks.index(stock))
 					result[k].append(foreign.text)
 					sheet.update_cell(row, col, foreign.text)
-					row = row + 1			
+					row = row + 1
+					reference_row = reference_row + 1
+				elif current > reference:
+					continue
+				elif current < reference:
+					print("Error")
+					return
 				prev = current 
 
 if __name__ == "__main__":
