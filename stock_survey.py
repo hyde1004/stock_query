@@ -6,6 +6,10 @@ import pprint
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
+# references:
+#  - https://gspread.readthedocs.io/en/latest/ (gspread API Reference)
+#  - https://www.twilio.com/blog/2017/02/an-easy-way-to-read-and-write-to-a-google-spreadsheet-in-python.html
+
 check_days = [
 	'2018-02-06', '2018-01-31', 
 	'2017-12-28', '2017-11-30', '2017-10-31', '2017-09-29', '2017-08-31', '2017-07-31', '2017-06-30', '2017-05-31', '2017-04-28', '2017-03-31', '2017-02-28', '2017-01-31', 
