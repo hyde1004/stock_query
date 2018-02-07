@@ -24,7 +24,8 @@ check_days = [
 	'2008-12-30', '2008-11-28', '2008-10-31', '2008-09-30', '2008-08-29', '2008-07-31'	]
 my_stocks = ['034950', '092130', '015760', '002960', '002460', '017670', '114090', '115310']
 stock_name = {'034950': '한국기업평가', '092130': '이크레더블', '015760':'한국전력', '002960':'한국쉘석유', '002460':'화성산업', '017670':'SK텔레콤', '114090':'GKL', '115310':'인포바인'}
-index_day = []
+months = 10
+index_day = check_days[:months]
 result = {}
 pages = range(1, 36)
 
@@ -46,7 +47,7 @@ def do_index(stocks):
 	col = 1
 	sheet.update_cell(row, col, 'date')
 	
-	for check_day in check_days:
+	for check_day in index_day:
 		row = row + 1
 		result[check_day] = []
 		sheet.update_cell(row, col, check_day)
