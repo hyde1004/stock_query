@@ -57,8 +57,6 @@ def get_referece_day(row):
 def do_query(stocks):
 	print('query...')
 
-	prev = datetime.date(1900, 1, 1)
-
 	for stock in stocks:
 		row = 2
 		col = stocks.index(stock) + 2
@@ -91,7 +89,6 @@ def do_query(stocks):
 				elif current < reference:
 					print("Error")
 					return
-				prev = current 
 
 if __name__ == "__main__":
 #	do_init()
