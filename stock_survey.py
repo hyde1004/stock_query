@@ -26,7 +26,7 @@ my_stocks = ['034950', '092130', '015760', '002960', '002460', '017670', '114090
 stock_name = {'034950': '한국기업평가', '092130': '이크레더블', '015760':'한국전력', '002960':'한국쉘석유', '002460':'화성산업', '017670':'SK텔레콤', '114090':'GKL', '115310':'인포바인'}
 index_day = []
 result = {}
-period = range(1, 36)
+pages = range(1, 36)
 
 #def do_init():
 	# use creds to create a client to interact with the Google Drive API
@@ -62,7 +62,7 @@ def do_query(stocks):
 		col = stocks.index(stock) + 2
 		reference_row = 2
 		sheet.update_cell(1, col, stock_name[stock])
-		for page in period:
+		for page in pages:
 			query_url = 'http://finance.naver.com/item/frgn.nhn?code=%s&page=%s' % (stock, page) 
 
 			r = requests.get(query_url)   
