@@ -74,7 +74,9 @@ def do_query(stocks):
 
 			for day, foreign in zip(day_info, foreign_info):   
 				s = datetime.datetime.strptime(day.text, '%Y.%m.%d')   
-				current = datetime.date(s.year, s.month, s.day)   
+				current = datetime.date(s.year, s.month, s.day) 
+				if get_referece_day(reference_row) == '':
+					break  
 				t = datetime.datetime.strptime(get_referece_day(reference_row), '%Y-%m-%d')
 				reference = datetime.date(t.year, t.month, t.day)
 				print('reference:%s, current:%s' % (reference, current) )
@@ -90,6 +92,9 @@ def do_query(stocks):
 				elif current < reference:
 					print("Error")
 					return
+
+			if get_referece_day(reference_row) == '':
+				break
 
 if __name__ == "__main__":
 #	do_init()
