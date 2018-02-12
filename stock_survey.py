@@ -55,6 +55,13 @@ def do_index(stocks):
 def get_referece_day(row):
 	return sheet.cell(row, 1).value
 
+def	pseudo_get_referece_day(row):
+	row_in_sheet = row - 2
+	if row_in_sheet < 0 or row_in_sheet >= len(index_day) :
+		return ''
+	
+	return index_day[row_in_sheet]
+
 def do_query(stocks):
 	print('query...')
 
@@ -75,9 +82,9 @@ def do_query(stocks):
 			for day, foreign in zip(day_info, foreign_info):   
 				s = datetime.datetime.strptime(day.text, '%Y.%m.%d')   
 				current = datetime.date(s.year, s.month, s.day) 
-				if get_referece_day(reference_row) == '':
+				if pseudo_get_referece_day(reference_row) == '':
 					break  
-				t = datetime.datetime.strptime(get_referece_day(reference_row), '%Y-%m-%d')
+				t = datetime.datetime.strptime(pseudo_get_referece_day(reference_row), '%Y-%m-%d')
 				reference = datetime.date(t.year, t.month, t.day)
 				print('reference:%s, current:%s' % (reference, current) )
 				if current == reference:
@@ -93,7 +100,7 @@ def do_query(stocks):
 					print("Error")
 					return
 
-			if get_referece_day(reference_row) == '':
+			if pseudo_get_referece_day(reference_row) == '':
 				break
 
 if __name__ == "__main__":
